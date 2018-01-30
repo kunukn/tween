@@ -1,4 +1,18 @@
-var tween = function () {
+(function (global, factory) {
+  if (typeof define === "function" && define.amd) {
+    define(['module'], factory);
+  } else if (typeof exports !== "undefined") {
+    factory(module);
+  } else {
+    var mod = {
+      exports: {}
+    };
+    factory(mod);
+    global.tween = mod.exports;
+  }
+})(this, function (module) {
+  'use strict';
+
   var root = typeof window !== 'undefined' ? window : global;
   var rAF = root.requestAnimationFrame ? root.requestAnimationFrame.bind(root) : function (callback) {
     return root.setTimeout(callback, 16);
@@ -32,9 +46,6 @@ var tween = function () {
     var startTime = getNow();
     play();
   };
-  tween.version = '0.0.3';
-  return tween;
-}();
 
-// const l = console.log.bind(console);
-// tween({ duration: 500, update: l, complete: l });
+  module.exports = tween;
+});
