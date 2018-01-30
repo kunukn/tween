@@ -5,15 +5,14 @@
   "main": "dist/tween.js",
   "scripts": {
     "build": "npx babel src/tween.js --out-file dist/tween.js",
-    "deploy": "npx babel src/tween.js --presets=babili --out-file dist/tween.min.js "
+    "deploy":
+      "npx babel src/tween.js --presets=babili --out-file dist/tween.min.js "
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/kunukn/tween.git"
   },
-  "files": [
-    "dist"
-  ],
+  "files": ["dist"],
   "babel": {
     "presets": [
       [
@@ -25,9 +24,7 @@
     ],
     "env": {
       "production": {
-        "presets": [
-          "babili"
-        ]
+        "presets": ["babili"]
       }
     }
   },
