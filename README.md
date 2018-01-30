@@ -5,8 +5,9 @@
 example
 
 ```
+var tween = require("@kunukn/tween");
 const log = console.log.bind(console);
-tween({ duration: 500, update: log, complete: log });
+tween({ duration: 1500, update: log, complete: log });
 ```
 
 # npm
