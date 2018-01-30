@@ -21,6 +21,7 @@ const tween = ({ duration = 300, update, complete } = {}) => {
   };
 
   const startTime = getNow();
+  update && update(0);
   play();
 };
 

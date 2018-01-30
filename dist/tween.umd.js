@@ -44,6 +44,7 @@
     };
 
     var startTime = getNow();
+    update && update(0);
     play();
   };
 
