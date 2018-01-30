@@ -2,12 +2,18 @@
 
 ## usage
 
-example
+examples
 
 ```
 var tween = require("@kunukn/tween");
+var log = console.log.bind(console);
+tween({ duration: 500, update: log, complete: log });
+```
+
+```
+import tween from '@kunukn/tween';
 const log = console.log.bind(console);
-tween({ duration: 1500, update: log, complete: log });
+tween({ duration: 500, update: log, complete: log });
 ```
 
 ## npm
