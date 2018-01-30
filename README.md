@@ -1,6 +1,6 @@
 # tween
 
-# usage
+## usage
 
 example
 
@@ -10,11 +10,11 @@ const log = console.log.bind(console);
 tween({ duration: 1500, update: log, complete: log });
 ```
 
-# npm
+## npm
 
 https://www.npmjs.com/package/@kunukn/tween
 
-# cdn
+## cdn
 
 https://unpkg.com/@kunukn/tween/
 
