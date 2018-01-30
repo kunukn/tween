@@ -1,6 +1,6 @@
 {
   "name": "@kunukn/tween",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "tween",
   "main": "dist/tween.js",
   "scripts": {
