@@ -4,14 +4,20 @@ const rAF = root.requestAnimationFrame
   : callback => root.setTimeout(callback, 16);
 const getNow = () => new Date().getTime();
 
-const tween = ({ duration = 300, update, complete } = {}) => {
+const tween = ({
+  duration = 300,
+  update,
+  complete,
+  includeFirst = true,
+  includeLast = true,
+} = {}) => {
   const play = () => {
     if (duration <= 0) return;
 
     const now = getNow();
     const elapsedTime = Math.min(duration, now - startTime);
     if (elapsedTime >= duration) {
-      update && update(1);
+      includeLast && update && update(1);
       complete && complete({ startTime, now, elapsedTime });
     } else {
       const range = elapsedTime / duration;
@@ -21,7 +27,7 @@ const tween = ({ duration = 300, update, complete } = {}) => {
   };
 
   const startTime = getNow();
-  update && update(0);
+  includeFirst && update && update(0);
   play();
 };
 
