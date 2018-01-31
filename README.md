@@ -24,8 +24,16 @@ tween({ duration: 500, update: log, complete: onComplete });
 import tween from '@kunukn/tween';
 const onUpdate = range => console.log(range);
 const onComplete = ({ startTime, now, elapsedTime }) => console.log(startTime, now, elapsedTime);
-tween({ duration: 500, update: onUpdate, complete: onComplete });
+tween({ duration: 500, update: onUpdate, complete: onComplete, ensureLast: true });
 ```
+
+tween arguments:
+
+* duration in milli seconds
+* update is a function called on tween update with range value between [0;1]
+* complete is function called when the tween is done
+* ensureLast is default true and ensures update(1) is called as the last step.
+
 
 ## npm
 
