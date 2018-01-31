@@ -8,16 +8,16 @@ const tween = ({
   duration = 300,
   update,
   complete,
-  includeFirst = true,
-  includeLast = true,
+  ensureLast = true,
 } = {}) => {
-  const play = () => {
-    if (duration <= 0) return;
 
+  duration = +duration;
+
+  const play = () => {
     const now = getNow();
     const elapsedTime = Math.min(duration, now - startTime);
     if (elapsedTime >= duration) {
-      includeLast && update && update(1);
+      ensureLast && update && update(1);
       complete && complete({ startTime, now, elapsedTime });
     } else {
       const range = elapsedTime / duration;
@@ -27,8 +27,11 @@ const tween = ({
   };
 
   const startTime = getNow();
-  includeFirst && update && update(0);
-  play();
+
+  if (duration > 0) {
+    update && update(0);
+    rAF(play);
+  }
 };
 
 module.exports = tween;

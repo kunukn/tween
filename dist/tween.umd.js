@@ -27,18 +27,16 @@
         duration = _ref$duration === undefined ? 300 : _ref$duration,
         update = _ref.update,
         complete = _ref.complete,
-        _ref$includeFirst = _ref.includeFirst,
-        includeFirst = _ref$includeFirst === undefined ? true : _ref$includeFirst,
-        _ref$includeLast = _ref.includeLast,
-        includeLast = _ref$includeLast === undefined ? true : _ref$includeLast;
+        _ref$ensureLast = _ref.ensureLast,
+        ensureLast = _ref$ensureLast === undefined ? true : _ref$ensureLast;
+
+    duration = +duration;
 
     var play = function play() {
-      if (duration <= 0) return;
-
       var now = getNow();
       var elapsedTime = Math.min(duration, now - startTime);
       if (elapsedTime >= duration) {
-        includeLast && update && update(1);
+        ensureLast && update && update(1);
         complete && complete({ startTime: startTime, now: now, elapsedTime: elapsedTime });
       } else {
         var range = elapsedTime / duration;
@@ -48,8 +46,11 @@
     };
 
     var startTime = getNow();
-    includeFirst && update && update(0);
-    play();
+
+    if (duration > 0) {
+      update && update(0);
+      rAF(play);
+    }
   };
 
   module.exports = tween;
