@@ -26,7 +26,11 @@
         _ref$duration = _ref.duration,
         duration = _ref$duration === undefined ? 300 : _ref$duration,
         update = _ref.update,
-        complete = _ref.complete;
+        complete = _ref.complete,
+        _ref$includeFirst = _ref.includeFirst,
+        includeFirst = _ref$includeFirst === undefined ? true : _ref$includeFirst,
+        _ref$includeLast = _ref.includeLast,
+        includeLast = _ref$includeLast === undefined ? true : _ref$includeLast;
 
     var play = function play() {
       if (duration <= 0) return;
@@ -34,7 +38,7 @@
       var now = getNow();
       var elapsedTime = Math.min(duration, now - startTime);
       if (elapsedTime >= duration) {
-        update && update(1);
+        includeLast && update && update(1);
         complete && complete({ startTime: startTime, now: now, elapsedTime: elapsedTime });
       } else {
         var range = elapsedTime / duration;
@@ -44,7 +48,7 @@
     };
 
     var startTime = getNow();
-    update && update(0);
+    includeFirst && update && update(0);
     play();
   };
 
