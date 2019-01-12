@@ -61,5 +61,3 @@
 
   module.exports = tween;
 });
-
-//# sourceMappingURL=tween.umd.js.map
