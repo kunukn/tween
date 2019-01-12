@@ -7,7 +7,7 @@
     "start": "node src/example.js",
     "umd": "npx babel src/tween.js --no-babelrc --presets=es2015 --plugins transform-es2015-modules-umd --out-file dist/tween.umd.js",
     "umd-min": "npx babel src/tween.js --no-babelrc --presets=es2015,babili --plugins transform-es2015-modules-umd --out-file dist/tween.umd.min.js",
-    "deploy": "npm run umd & npm run umd-min"
+    "build": "npm run umd & npm run umd-min"
   },
   "repository": {
     "type": "git",
