@@ -6,7 +6,7 @@ function onComplete(arg){
   log(arg);
   log('** example done');
   log('**  example start 2');
-  tween({ duration: 500, update: log, complete: onComplete2 });  
+  tween({ duration: 300, update: log, complete: onComplete2 });  
 }
 
 function onComplete2(arg){
