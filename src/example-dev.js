@@ -16,4 +16,5 @@ function onComplete2(arg){
 
 log('**  example start');
 var cancel = tween({ duration: 500, update: log, complete: onComplete });
+
 //setTimeout(() => cancel(range => log('cancelled', range)), 300);
