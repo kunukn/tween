@@ -18,22 +18,20 @@
     return root.setTimeout(callback, 16);
   };
 
-  var getNow = function getNow() {
+  function getNow() {
     return new Date().getTime();
-  };
+  }
 
-  var tween = function tween() {
-    var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
-        _ref$duration = _ref.duration,
-        duration = _ref$duration === void 0 ? 300 : _ref$duration,
-        update = _ref.update,
-        complete = _ref.complete,
-        _ref$ensureLast = _ref.ensureLast,
-        ensureLast = _ref$ensureLast === void 0 ? true : _ref$ensureLast;
+  ;
 
-    duration = +duration;
+  function tween(args) {
+    var attrs = args || {};
+    var update = attrs.update;
+    var complete = attrs.complete;
+    var duration = attrs.duration != null ? +attrs.duration : 300;
+    var ensureLast = attrs.ensureLast != null ? attrs.ensureLast : true;
 
-    var play = function play() {
+    function play() {
       var now = getNow();
       var elapsedTime = Math.min(duration, now - startTime);
 
@@ -49,7 +47,7 @@
         update && update(range);
         rAF(play);
       }
-    };
+    }
 
     var startTime = getNow();
 
@@ -57,7 +55,8 @@
       update && update(0);
       rAF(play);
     }
-  };
+  }
 
+  ;
   module.exports = tween;
 });

@@ -1,32 +1,43 @@
-const root = typeof window !== 'undefined' ? window : global;
-const rAF = root.requestAnimationFrame
-  ? root.requestAnimationFrame.bind(root)
+var root = typeof window !== 'undefined'
+  ? window
+  : global;
+var rAF = root.requestAnimationFrame
+  ? root
+    .requestAnimationFrame
+    .bind(root)
   : callback => root.setTimeout(callback, 16);
-const getNow = () => new Date().getTime();
 
-const tween = ({
-  duration = 300,
-  update,
-  complete,
-  ensureLast = true,
-} = {}) => {
+function getNow() {
+  return new Date().getTime();
+};
 
-  duration = +duration;
+function tween(args) {
 
-  const play = () => {
-    const now = getNow();
-    const elapsedTime = Math.min(duration, now - startTime);
+  var attrs = args || {};
+
+  var update = attrs.update;
+  var complete = attrs.complete;
+  var duration = attrs.duration != null
+    ? + (attrs.duration)
+    : 300;
+  var ensureLast = attrs.ensureLast != null
+    ? attrs.ensureLast
+    : true;
+
+  function play() {
+    var now = getNow();
+    var elapsedTime = Math.min(duration, now - startTime);
     if (elapsedTime >= duration) {
       ensureLast && update && update(1);
-      complete && complete({ startTime, now, elapsedTime });
+      complete && complete({startTime, now, elapsedTime});
     } else {
-      const range = elapsedTime / duration;
+      var range = elapsedTime / duration;
       update && update(range);
       rAF(play);
     }
-  };
+  }
 
-  const startTime = getNow();
+  var startTime = getNow();
 
   if (duration > 0) {
     update && update(0);
