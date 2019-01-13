@@ -12,6 +12,11 @@ function getNow() {
 
 function tween(args) {
 
+  var prevRange;
+  var cancelled = false;
+  var startTime;
+  var range;
+
   var attrs = args || {};
 
   var update = attrs.update;
@@ -24,9 +29,11 @@ function tween(args) {
     : true;
 
   function play() {
+    if(cancelled) return;
+
     var now = getNow();
     var elapsedTime = Math.min(duration, now - startTime);
-    var range = elapsedTime / duration;
+    range = elapsedTime / duration;
     if (elapsedTime >= duration) {
       ensureLast && prevRange !== range && update && update(1);
       complete && complete({startTime: startTime, now: now, elapsedTime: elapsedTime});
@@ -37,12 +44,16 @@ function tween(args) {
     }
   }
 
-  var prevRange;
-  var startTime = getNow();
+  startTime = getNow();
 
   if (duration > 0) {
     update && update(0);
     rAF(play);
+  }
+
+  return function cancel(callback){
+    cancelled = true;
+    callback && callback(range);
   }
 };
 

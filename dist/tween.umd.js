@@ -15,7 +15,7 @@
 
   var root = typeof window !== 'undefined' ? window : global;
   var rAF = root.requestAnimationFrame ? requestAnimationFrame.bind(root) : function (callback) {
-    return setTimeout(callback, 16);
+    setTimeout(callback, 16);
   };
 
   function getNow() {
@@ -25,6 +25,10 @@
   ;
 
   function tween(args) {
+    var prevRange;
+    var cancelled = false;
+    var startTime;
+    var range;
     var attrs = args || {};
     var update = attrs.update;
     var complete = attrs.complete;
@@ -32,9 +36,10 @@
     var ensureLast = attrs.ensureLast != null ? attrs.ensureLast : true;
 
     function play() {
+      if (cancelled) return;
       var now = getNow();
       var elapsedTime = Math.min(duration, now - startTime);
-      var range = elapsedTime / duration;
+      range = elapsedTime / duration;
 
       if (elapsedTime >= duration) {
         ensureLast && prevRange !== range && update && update(1);
@@ -50,13 +55,17 @@
       }
     }
 
-    var prevRange;
-    var startTime = getNow();
+    startTime = getNow();
 
     if (duration > 0) {
       update && update(0);
       rAF(play);
     }
+
+    return function cancel(callback) {
+      cancelled = true;
+      callback && callback(range);
+    };
   }
 
   ;
