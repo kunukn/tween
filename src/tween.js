@@ -4,7 +4,7 @@ var root = typeof window !== 'undefined'
 
 var rAF = root.requestAnimationFrame
   ? requestAnimationFrame.bind(root)
-  : callback => setTimeout(callback, 16);
+  : function(callback){setTimeout(callback, 16)};
 
 function getNow() {
   return new Date().getTime();
