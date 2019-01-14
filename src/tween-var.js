@@ -1,38 +1,25 @@
-(function (global, factory) {
-  if (typeof define === "function" && define.amd) {
-    define([], factory);
-  } else if (typeof exports !== "undefined") {
-    factory();
-  } else {
-    var mod = {
-      exports: {}
-    };
-    factory();
-    global.tween = mod.exports;
-  }
-})(this, function () {
-  "use strict";
-
-  var root = typeof window !== 'undefined' ? window : global;
-  var rAF = root.requestAnimationFrame ? requestAnimationFrame.bind(root) : function (callback) {
-    setTimeout(callback, 16);
-  };
+var tween = (function () {
 
   function getNow() {
     return new Date().getTime();
-  }
+  };
 
-  ;
+  return function tween(args) {
 
-  function tween(args) {
     var prevRange;
     var cancelled = false;
     var startTime;
+
     var attrs = args || {};
+
     var update = attrs.update;
     var complete = attrs.complete;
-    var duration = attrs.duration != null ? +attrs.duration : 300;
-    var ensureLast = attrs.ensureLast != null ? attrs.ensureLast : true;
+    var duration = attrs.duration != null
+      ? + (attrs.duration)
+      : 300;
+    var ensureLast = attrs.ensureLast != null
+      ? attrs.ensureLast
+      : true;
 
     function getCurrent(startTime) {
       var now = getNow();
@@ -46,7 +33,9 @@
     }
 
     function play() {
-      if (cancelled) return;
+      if (cancelled) 
+        return;
+      
       var current = getCurrent(startTime);
 
       if (current.elapsedTime >= duration) {
@@ -55,7 +44,7 @@
       } else {
         update && update(current.range);
         prevRange = current.range;
-        rAF(play);
+        requestAnimationFrame(play);
       }
     }
 
@@ -63,15 +52,13 @@
 
     if (duration > 0) {
       update && update(0);
-      rAF(play);
+      requestAnimationFrame(play);
     }
 
     return function cancel(callback) {
       cancelled = true;
       callback && callback(getCurrent(startTime));
-    };
-  }
+    }
+  };
 
-  ;
-  module.exports = tween;
-});
+})();
