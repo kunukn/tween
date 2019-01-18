@@ -70,3 +70,6 @@ function tween(args) {
 };
 
 module.exports = tween;
+//export default tween;
+
+
