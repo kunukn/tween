@@ -2,17 +2,17 @@
   "name": "@kunukn/tween",
   "version": "1.0.2",
   "description": "tween",
-  "main": "dist/tween.cjs.min.js",
+  "main": "dist/tween.umd.min.js",
   "scripts": {
     "start": "node src/example-dev.js",
-    "verify": "node src/example.js",
+    "verify": "node src/verify-build.js",
+    "clean": "rimraf dist/**",
     "umd": "npx babel src/tween.js  --out-file dist/tween.umd.js",
     "umd:watch": "npx babel src/tween.js --watch --out-file dist/tween.umd.js --source-maps",
     "minify-umd": "uglifyjs dist/tween.umd.js -c -m -o dist/tween.umd.min.js",
     "minify-cjs": "uglifyjs src/tween.js -c -m -o dist/tween.cjs.min.js",
     "minify-var": "uglifyjs src/tween-var.js -c -m -o dist/tween.var.min.js",
-    "build-old": "npm run umd && npm run minify-umd && npm run minify-cjs",
-    "build": "npm run minify-var && npm run minify-cjs"
+    "build": "yarn clean && yarn umd && yarn minify-var && yarn minify-cjs && yarn minify-umd"
   },
   "repository": {
     "type": "git",
@@ -29,12 +29,13 @@
   "homepage": "https://github.com/kunukn/tween#readme",
   "devDependencies": {
     "@babel/cli": "^7.2.3",
-    "@babel/core": "^7.2.2",
+    "@babel/core": "^7.4.0",
     "@babel/plugin-transform-modules-umd": "^7.2.0",
-    "@babel/plugin-transform-runtime": "^7.2.0",
-    "@babel/preset-env": "^7.2.3",
-    "@babel/runtime": "^7.2.0",
-    "babel-plugin-module-resolver": "^3.1.1",
-    "uglify-js": "^3.4.9"
+    "@babel/plugin-transform-runtime": "^7.4.0",
+    "@babel/preset-env": "^7.4.2",
+    "@babel/runtime": "^7.4.2",
+    "babel-plugin-module-resolver": "^3.2.0",
+    "uglify-js": "^3.5.2",
+    "rimraf": "^2.6.3"
   }
 }

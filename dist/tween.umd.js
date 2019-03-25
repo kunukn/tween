@@ -1,38 +1,34 @@
 (function (global, factory) {
   if (typeof define === "function" && define.amd) {
-    define(["exports"], factory);
+    define([], factory);
   } else if (typeof exports !== "undefined") {
-    factory(exports);
+    factory();
   } else {
     var mod = {
       exports: {}
     };
-    factory(mod.exports);
+    factory();
     global.tween = mod.exports;
   }
-})(this || self, function (_exports) {
+})(this, function () {
   "use strict";
 
-  Object.defineProperty(_exports, "__esModule", {
-    value: true
-  });
-  _exports.default = void 0;
   var root = typeof window !== 'undefined' ? window : global;
   var rAF = root.requestAnimationFrame ? requestAnimationFrame.bind(root) : function (callback) {
     setTimeout(callback, 16);
   };
 
   function getNow() {
-    return new Date().getTime();
+    return Date.now();
   }
 
   ;
 
-  function tween(args) {
+  function tween(params) {
     var prevRange;
     var cancelled = false;
     var startTime;
-    var attrs = args || {};
+    var attrs = params || {};
     var update = attrs.update;
     var complete = attrs.complete;
     var duration = attrs.duration != null ? +attrs.duration : 300;
@@ -76,6 +72,6 @@
     };
   }
 
-  var _default = tween;
-  _exports.default = _default;
+  ;
+  module.exports = tween;
 });
