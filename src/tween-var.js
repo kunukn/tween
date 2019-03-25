@@ -1,7 +1,7 @@
 var tween = (function () {
 
   function getNow() {
-    return new Date().getTime();
+    return Date.now();
   };
 
   return function tween(args) {

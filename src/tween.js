@@ -9,7 +9,7 @@ var rAF = root.requestAnimationFrame
   };
 
 function getNow() {
-  return new Date().getTime();
+  return Date.now();
 };
 
 function tween(args) {
@@ -70,6 +70,3 @@ function tween(args) {
 };
 
 module.exports = tween;
-//export default tween;
-
-
