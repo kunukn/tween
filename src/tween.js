@@ -12,13 +12,13 @@ function getNow() {
   return Date.now();
 };
 
-function tween(args) {
+function tween(params) {
 
   var prevRange;
   var cancelled = false;
   var startTime;
 
-  var attrs = args || {};
+  var attrs = params || {};
 
   var update = attrs.update;
   var complete = attrs.complete;

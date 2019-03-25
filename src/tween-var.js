@@ -4,13 +4,13 @@ var tween = (function () {
     return Date.now();
   };
 
-  return function tween(args) {
+  return function tween(params) {
 
     var prevRange;
     var cancelled = false;
     var startTime;
 
-    var attrs = args || {};
+    var attrs = params || {};
 
     var update = attrs.update;
     var complete = attrs.complete;
