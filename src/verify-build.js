@@ -1,5 +1,5 @@
 var t = require('../dist/tween.umd.min.js');
-var t2 = require('../dist/tween.umd.js');
+var t2 = require('../dist/tween.cjs.min.js');
 
 var tween = t.default || t;
 var tween2 = t2.default || t2;
