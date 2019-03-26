@@ -6,13 +6,12 @@
   "scripts": {
     "start": "node src/example-dev.js",
     "verify": "node src/verify-build.js",
-    "clean": "rimraf dist/**",
-    "umd": "npx babel src/tween.js  --out-file dist/tween.umd.js",
-    "umd:watch": "npx babel src/tween.js --watch --out-file dist/tween.umd.js --source-maps",
-    "minify-umd": "uglifyjs dist/tween.umd.js -c -m -o dist/tween.umd.min.js",
+    "clean": "rimraf dist/*.*",
+    "umd": "npx babel src/tween.js --out-file temp/tween.umd.js",
+    "umd:watch": "npx babel src/tween.js --watch --out-file temp/tween.umd.js --source-maps",
+    "minify-umd": "uglifyjs temp/tween.umd.js -c -m -o dist/tween.umd.min.js",
     "minify-cjs": "uglifyjs src/tween.js -c -m -o dist/tween.cjs.min.js",
-    "minify-var": "uglifyjs src/tween-var.js -c -m -o dist/tween.var.min.js",
-    "build": "yarn clean && yarn umd && yarn minify-var && yarn minify-cjs && yarn minify-umd"
+    "build": "yarn clean && yarn umd && yarn minify-cjs && yarn minify-umd"
   },
   "repository": {
     "type": "git",

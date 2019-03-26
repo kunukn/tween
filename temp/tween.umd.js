@@ -32,7 +32,7 @@
     var update = attrs.update;
     var complete = attrs.complete;
     var duration = attrs.duration != null ? +attrs.duration : 300;
-    var ensureLast = attrs.ensureLast != null ? attrs.ensureLast : true;
+    var cAF = null;
 
     function getCurrent(startTime) {
       var now = getNow();
@@ -50,12 +50,12 @@
       var current = getCurrent(startTime);
 
       if (current.elapsedTime >= duration) {
-        ensureLast && prevRange !== current.range && update && update(1);
+        prevRange !== current.range && update && update(1);
         complete && complete(current);
       } else {
         update && update(current.range);
         prevRange = current.range;
-        rAF(play);
+        cAF = rAF(play);
       }
     }
 
@@ -63,11 +63,12 @@
 
     if (duration > 0) {
       update && update(0);
-      rAF(play);
+      cAF = rAF(play);
     }
 
     return function cancel(callback) {
       cancelled = true;
+      cAF && cAF();
       callback && callback(getCurrent(startTime));
     };
   }
